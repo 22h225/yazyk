@@ -1,5 +1,12 @@
 <script lang="ts">
-  import "../app.css"
+	import '../app.css';
 </script>
 
-<slot />
+<header class="p-2 bg-black text-white">
+	<h1 class="ml-2">
+		<a href="/">Yazyk</a>
+	</h1>
+</header>
+<main>
+	<slot />
+</main>

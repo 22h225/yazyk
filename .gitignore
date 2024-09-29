@@ -21,4 +21,5 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 # Assets
-assets
+assets/rus-balm-voc_flac
+assets/russian3
