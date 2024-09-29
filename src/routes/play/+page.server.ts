@@ -1,11 +1,4 @@
-import { parse } from 'csv-parse/sync';
-import { read } from '$app/server';
-import csv from '$lib/record.csv';
-
-let records = parse(await read(csv).text(), { columns: true }) as {
-	word: string;
-	translation: string;
-}[];
+import { records } from './record.server';
 
 export function load({ params, url }) {
 	let count = url.searchParams.get('c');
