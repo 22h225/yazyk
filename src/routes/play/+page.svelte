@@ -83,8 +83,6 @@
 		</table>
 	</div>
 {:else}
-	{is_finished}
-	{count}
 	<div class="border px-6 p-2 bg-gray-100">
 		<p>Progress: {count + 1}/{data.records.length}</p>
 	</div>
