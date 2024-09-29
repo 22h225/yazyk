@@ -1,9 +1,9 @@
 <script lang="ts">
 	export let data;
-	import { page } from '$app/stores'
-	let t = Number($page.url.searchParams.get('t') ?? 9)
+	import { page } from '$app/stores';
+	let t = Number($page.url.searchParams.get('t') ?? 9);
 
- 	function getRandomValues<T>(array: T[], n: number): T[] {
+	function getRandomValues<T>(array: T[], n: number): T[] {
 		if (n > array.length) {
 			throw new Error('n cannot be larger than the array length');
 		}
@@ -41,24 +41,14 @@
 	}
 
 	let count = 0;
-	let answers: string[] = [
-		// 'knowledge',
-		// 'direction',
-		// 'movement, motion, stirring',
-		// 'finally, at last',
-		// 'visit',
-		// 'begin, start, commence',
-		// 'role',
-		// 'Tuesday',
-		// 'let'
-	];
+	let answers: string[] = [];
 
-	$: record = data.records[count];
+	$: is_finished = count == data.records.length;
+	$: record = data.records[is_finished ? count - 1 : count];
 	$: translations = getRandomValues(
 		[record.translation, ...getRandomValues(data.translations, t - 1)],
 		t
 	);
-	$: is_finished = count == data.records.length - 1;
 </script>
 
 {#if is_finished}
@@ -81,7 +71,9 @@
 			</thead>
 			<tbody>
 				{#each answers as answer, i}
-					<tr class="border {answer == data.records[i].translation ? 'bg-green-100' : 'bg-red-100'}">
+					<tr
+						class="border {answer == data.records[i].translation ? 'bg-green-100' : 'bg-red-100'}"
+					>
 						<th class="px-1 py-0.5">{data.records[i].word}</th>
 						<th class="px-1 py-0.5">{data.records[i].translation}</th>
 						<th class="px-1 py-0.5">{answer}</th>
@@ -91,6 +83,8 @@
 		</table>
 	</div>
 {:else}
+	{is_finished}
+	{count}
 	<div class="border px-6 p-2 bg-gray-100">
 		<p>Progress: {count + 1}/{data.records.length}</p>
 	</div>
@@ -135,18 +129,9 @@
 						type="button"
 						class="block w-full text-left pl-8 p-1 border"
 						on:click={() => {
-							answers.push(translation);
-
-							if (translation == record.translation) {
-							} else {
-							}
-
-							if (count == data.records.length) {
-								console.log('Finished');
-								return;
-							}
-
 							count++;
+							if (is_finished) return;
+							answers.push(translation);
 						}}
 					>
 						<li class="text-lg pl-1">{translation}</li>
@@ -154,19 +139,5 @@
 				{/each}
 			</ul>
 		</div>
-		<!-- <div class="p-4">
-		<button
-			type="button"
-			class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700"
-		>
-			&lt;
-		</button>
-		<button
-			type="button"
-			class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700"
-		>
-			&gt;
-		</button>
-	</div> -->
 	</div>
 {/if}
