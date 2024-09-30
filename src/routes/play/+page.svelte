@@ -117,7 +117,7 @@
 				on:pause={onStopPlaying}
 				class="w-64"
 				autoplay
-				src={`/flac/${record.word}.flac`}
+				src={`/russian/${record.word}.flac`}
 			/>
 		</div>
 		<div>
