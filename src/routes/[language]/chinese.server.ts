@@ -1000,3 +1000,5 @@ export const records: { word: string, translation_en: string, translation_jp: st
     { word: "汽车", translation_en: "car", translation_jp: "車" },
     { word: "好看", translation_en: "nice", translation_jp: "ニース" },
 ];
+
+export default records;

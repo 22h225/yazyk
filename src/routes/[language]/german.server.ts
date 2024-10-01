@@ -805,3 +805,5 @@ export const records: { word: string, translation_en: string, translation_jp: st
     { word: "genau", translation_en: "Exactly", translation_jp: "その通り" },
     { word: "rechtfertigen", translation_en: "justify", translation_jp: "正当化する" },
 ];
+
+export default records;

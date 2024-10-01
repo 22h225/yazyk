@@ -669,3 +669,5 @@ export const records: { word: string, translation_en: string, translation_jp: st
     { word: "قطرة", translation_en: "drop", translation_jp: "落とす" },
     { word: "سوق", translation_en: "souk", translation_jp: "スーク" },
 ];
+
+export default records;

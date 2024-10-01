@@ -830,3 +830,5 @@ export const records: { word: string; translation_en: string; translation_jp: st
 	{ word: 'de wijn', translation_en: 'the wine', translation_jp: 'ワイン' },
 	{ word: 'de groente', translation_en: 'the vegetable', translation_jp: '野菜' }
 ];
+
+export default records;

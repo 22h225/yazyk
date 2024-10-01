@@ -1000,3 +1000,5 @@ export const records: { word: string, translation_en: string, translation_jp: st
     { word: "замок", translation_en: "castle", translation_jp: "ロック" },
     { word: "замок", translation_en: "lock", translation_jp: "ロック" },
 ];
+
+export default records;

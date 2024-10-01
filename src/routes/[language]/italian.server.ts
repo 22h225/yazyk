@@ -582,3 +582,5 @@ export const records: { word: string, translation_en: string, translation_jp: st
     { word: "la famiglia", translation_en: "the family", translation_jp: "家族" },
     { word: "trovare", translation_en: "find", translation_jp: "探す" },
 ];
+
+export default records;
