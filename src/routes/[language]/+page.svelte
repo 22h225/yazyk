@@ -40,15 +40,18 @@
 		playing = false;
 	}
 
+	let is_english_chosen = data.translation_language == 'en';
 	let count = 0;
 	let answers: string[] = [];
-	let translation_language =
-		data.translation_language == 'en' ? data.translations_en : data.translations_jp;
+	let translation_language = is_english_chosen ? data.translations_en : data.translations_jp;
 
 	$: is_finished = count == data.records.length;
 	$: record = data.records[is_finished ? count - 1 : count];
 	$: translations = getRandomValues(
-		[record.translation_en, ...getRandomValues(translation_language, t - 1)],
+		[
+			is_english_chosen ? record.translation_en : record.translation_jp,
+			...getRandomValues(translation_language, t - 1)
+		],
 		t
 	);
 </script>
@@ -58,7 +61,11 @@
 		<div class="p-4 flex flex-col items-center">
 			<p>Result</p>
 			<p class="text-xl">
-				{answers.filter((answer, i) => answer == data.records[i].translation_en).length}
+				{answers.filter((answer, i) =>
+					is_english_chosen
+						? answer == data.records[i].translation_en
+						: answer == data.records[i].translation_jp
+				).length}
 				/
 				{data.records.length}
 			</p>
@@ -74,12 +81,20 @@
 			<tbody>
 				{#each answers as answer, i}
 					<tr
-						class="border {answer == data.records[i].translation_en
+						class="border {(
+							is_english_chosen
+								? answer == data.records[i].translation_en
+								: answer == data.records[i].translation_jp
+						)
 							? 'bg-green-100'
 							: 'bg-red-100'}"
 					>
 						<th class="px-1 py-0.5">{data.records[i].word}</th>
-						<th class="px-1 py-0.5">{data.records[i].translation_en}</th>
+						<th class="px-1 py-0.5"
+							>{is_english_chosen
+								? data.records[i].translation_en
+								: data.records[i].translation_jp}</th
+						>
 						<th class="px-1 py-0.5">{answer}</th>
 					</tr>
 				{/each}
